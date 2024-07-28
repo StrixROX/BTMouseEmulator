@@ -27,10 +27,9 @@ ULONG NameToBthAddr(const char deviceName[], PSOCKADDR_BTH remoteBthAddr);
 int main() {
     ULONG               ulRetCode = CXN_SUCCESS;
     WSADATA             wsaData = { 0 };
-    const char          deviceName[] = "SHARD 21";
+    const char          deviceName[] = "Shard22";
     SOCKADDR_BTH        deviceBthAddr = { 0 };
     SOCKET              sock = INVALID_SOCKET;
-    //int                 iCxnCount = 0;
     
     //
     // Ask for Winsock v2.2
@@ -127,14 +126,15 @@ int main() {
         }
     }
 
-    //
-    // Close socket connection
-    //
-    if (SOCKET_ERROR == closesocket(sock)) {
-        printf("=CRITICAL= | closesocket() call failed w/socket = [0x%I64X]. WSAGetLastError=[%d]\n", sock, WSAGetLastError());
-        ulRetCode = CXN_ERROR;
+    if (INVALID_SOCKET != sock) {
+        //
+        // Close socket connection
+        //
+        if (SOCKET_ERROR == closesocket(sock)) {
+            printf("=CRITICAL= | closesocket() call failed w/socket = [0x%I64X]. WSAGetLastError=[%d]\n", sock, WSAGetLastError());
+            ulRetCode = CXN_ERROR;
+        }
     }
-
     sock = INVALID_SOCKET;
 
     return ulRetCode;
