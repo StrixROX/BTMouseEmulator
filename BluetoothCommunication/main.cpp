@@ -1,5 +1,6 @@
-#include <stdio.h>
+#include <initguid.h>
 #include <MouseEmulator.h>
+#include <stdio.h>
 #include <WinSock2.h>
 #include <ws2bth.h>
 
